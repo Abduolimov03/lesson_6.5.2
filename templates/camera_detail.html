@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Kamera Tafsilotlari</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            background-color: #eaeaea;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-link:hover {
+            background-color: #d6d6d6;
+        }
+
+        .camera-image {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #333;
+        }
+
+        .info {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 22px;
+            font-weight: bold;
+            color: #007bff;
+            margin-top: 10px;
+        }
+
+        .date {
+            color: #888;
+            font-size: 14px;
+        }.mega-btn {
+    display: inline-block;
+    padding: 16px 32px;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    background: linear-gradient(to right, #00c6ff, #0072ff);
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 114, 255, 0.3);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.mega-btn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(to right, #0072ff, #00c6ff);
+    box-shadow: 0 10px 25px rgba(0, 114, 255, 0.4);
+}
+.delete-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff4d4d;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(255, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.delete-btn:hover {
+    background-color: #e60000;
+    transform: scale(1.03);
+}
+
+
+    </style>
+</head>
+<body>
+
+<a href="{% url 'camera' %}" class="back-link">← Orqaga</a>
+
+<div class="container">
+    {% if camera.image %}
+        <img src="{{ camera.image.url }}" alt="{{ camera.brand }}" class="camera-image">
+    {% else %}
+        <img src="/media/default/camera.png" alt="Default Image" class="camera-image">
+    {% endif %}
+
+    <h2>{{ camera.brand }}</h2>
+    <div class="info">Narxi: <span class="price">${{ camera.price }}</span></div>
+    <div class="date">Yaratilgan sana: {{ camera.created_at|date:"d-m-Y H:i" }}</div>
+</div>
+<a href="{% url 'update-camera' camera.id %}" class="mega-btn">Update</a>
+<a href="{% url 'delete-camera' camera.id %}" class="delete-btn">🗑️ O‘chirish</a>
+
+
+
+</body>
+</html>
