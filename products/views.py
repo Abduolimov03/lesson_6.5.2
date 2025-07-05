@@ -78,5 +78,5 @@ class CameraUpdate(UpdateView):
 
 class CameraDelete(DeleteView):
     model = Camera
-    template_name = 'camera_confirm_delete.html'
+    template_name = 'delete_confirm.html'
     success_url = reverse_lazy('camera')
